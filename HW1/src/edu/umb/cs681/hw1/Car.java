@@ -61,11 +61,4 @@ public class Car {
         return this.dominationCount;
     }
 
-    public static void main(String[] args) {
-        Car car = new Car("Range Rover", "Velar", 40, 2021, 60000);
-        System.out.println("Make: " + car.get_make());
-        System.out.println("Model: " + car.get_model());
-
-    }
-
 }
