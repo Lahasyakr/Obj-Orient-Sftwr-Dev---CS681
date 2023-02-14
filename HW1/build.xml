@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project name="Homework 01" basedir="." default="run">
+<project name="HW1" basedir="." default="run">
     <property environment="env"/>
 
     <property name="src" location="src" />
