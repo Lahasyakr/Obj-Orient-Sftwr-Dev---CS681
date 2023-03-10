@@ -25,11 +25,11 @@ public class DJIAWkSummaryObservable<SummDary> extends Observable<Summary> {
 			collectionOfDailySummary.forEach((item) -> {
 
 				if (item.getHigh() > high) {
-					high = Double.valueOf(item.getHigh());
+					high = item.getHigh();
 
 				} else if (item.getLow() < low) {
 
-					low = Double.valueOf(item.getLow());
+					low = item.getLow();
 				}
 
 			});
