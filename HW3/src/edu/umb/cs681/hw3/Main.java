@@ -19,30 +19,24 @@ public class Main {
         System.out.println(path);
 
         try (Stream<String> lines = Files.lines(path)) {
-            List<List<String>> csv = lines.map(line -> {
-                return Stream.of(line.split(",")).map(value -> value.substring(0, value.length()))
+            List<List<Double>> csv = lines.skip(1).map(line -> {
+                return Stream.of(line.split(",")).skip(1).map(value -> Double.parseDouble(value))
                         .collect(Collectors.toList());
             }).collect(Collectors.toList());
             System.out.println(csv);
-            
 
             DJIAWkSummaryObservable obj = new DJIAWkSummaryObservable();
             CandleStickObserver candleStickObserver = new CandleStickObserver();
             obj.addObserver(candleStickObserver);
 
-            
-
-            csv.forEach((item) -> {
-                if (item.get(0) != "Date") {
-                    try {
-                        DSummary d = new DSummary(Double.parseDouble(item.get(1)), Double.parseDouble(item.get(4)),
-                                Double.parseDouble(item.get(2)), Double.parseDouble(item.get(3)));
-                        obj.addSummary(d);
-                    } catch (NumberFormatException ignored) {
-                        //System.out.println("Error!!, please try again later");
-                    }
+            csv.stream().forEach((item) -> {
+                try {
+                    DSummary d = new DSummary(item.get(0), item.get(3), item.get(1), item.get(2));
+                    obj.addSummary(d);
+                } catch (NumberFormatException ignored) {
 
                 }
+
             });
         } catch (IOException ex) {
             System.out.println("Exception");
