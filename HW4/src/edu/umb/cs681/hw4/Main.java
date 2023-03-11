@@ -22,7 +22,7 @@ public class Main {
                 return Stream.of(line.split(",")).map(value -> value.substring(0, value.length()))
                         .collect(Collectors.toList());
             }).collect(Collectors.toList());
-            new DataProcessing_1();
+
             // System.out.println("\nEntire data: \n" + data);
             DataProcessing_1.dataprocessing1(data);
             DataProcessing_2.dataprocessing2(data);
