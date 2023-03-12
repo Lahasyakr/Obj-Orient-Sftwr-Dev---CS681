@@ -3,10 +3,10 @@ package edu.umb.cs681.hw3.Observer;
 import java.util.LinkedList;
 
 import edu.umb.cs681.hw3.Summary.DSummary;
-import edu.umb.cs681.hw3.Summary.Summary;
+
 import edu.umb.cs681.hw3.Summary.WkSummary;
 
-public class DJIAWkSummaryObservable<SummDary> extends Observable<Summary> {
+public class DJIAWkSummaryObservable extends Observable<WkSummary> {
 	private LinkedList<DSummary> collectionOfDailySummary = new LinkedList<>();
 	// private Map<DSummary> mappings = new HashMap<DSummary>();
 	private double open;
