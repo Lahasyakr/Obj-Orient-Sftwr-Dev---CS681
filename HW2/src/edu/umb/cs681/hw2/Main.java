@@ -16,13 +16,6 @@ public class Main {
         usedCars.add(new Car("Range Rover", "Evoque", 48, 2017, 52000f));
         usedCars.add(new Car("Mazda", "CX-5", 28, 2016, 32000f));
 
-        List<Car> carSortByPrice = usedCars.stream()
-                .sorted(Comparator.comparingDouble(Car::get_price)).collect(Collectors.toList());
-
-        System.out.println("lowest car price :" + carSortByPrice.get(0).get_price());
-
-        System.out.println("Highest Car price :" + carSortByPrice.get(carSortByPrice.size() - 1).get_price());
-
         System.out.println("\ncalculating average price of the car using class instance");
         double averagePrice = usedCars.stream()
                 .map((car) -> car.get_price()).reduce(new CarPriceResultHolder(),
@@ -43,6 +36,13 @@ public class Main {
                 .getAverage();
 
         System.out.println("average car price  : " + averagePrice);
+
+        List<Car> carSortByPrice = usedCars.stream()
+                .sorted(Comparator.comparingDouble(Car::get_price)).collect(Collectors.toList());
+
+        System.out.println("lowest car price :" + carSortByPrice.get(0).get_price());
+
+        System.out.println("Highest Car price :" + carSortByPrice.get(carSortByPrice.size() - 1).get_price());
 
     }
 }
