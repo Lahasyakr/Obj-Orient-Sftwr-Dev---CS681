@@ -23,7 +23,7 @@ public class RunnableCancellableFileSystem implements Runnable {
     @Override
     public void run() {
 
-        while (!done) {
+        while (true) {
             lock.lock();
             try {
                 if (done) {
