@@ -31,7 +31,7 @@ public class RunnableCancellableFileSystem implements Runnable {
                     break;
                 } else {
                     LocalDateTime date = LocalDateTime.now();
-
+                    FileSystem fs = FileSystem.getInstance();
                     Directory root = new Directory(null, "root", 0, date);
                     Directory Apps = new Directory(root, "Apps", 0, date);
                     Directory bin = new Directory(root, "bin", 0, date);
