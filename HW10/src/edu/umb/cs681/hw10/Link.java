@@ -11,8 +11,12 @@ public class Link extends FSElement {
     public Link(Directory parent, String name, int size, LocalDateTime creationTime, FSElement target) {
         super(parent, name, size, creationTime);
         parent.appendChild(this);
-
-        this.target = target;
+        lock.lock();
+        try {
+            this.target = target;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
