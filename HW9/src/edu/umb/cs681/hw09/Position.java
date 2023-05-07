@@ -35,7 +35,7 @@ public record Position(double latitude, double longitude, double altitude) {
     }
 
     boolean northOf(Position anotherPosition) {
-        var diff = this.longitude - anotherPosition.longitude;
+        var diff = this.latitude  - anotherPosition.latitude ;
         if (diff > 0) {
             return true;
         } else {
@@ -44,7 +44,7 @@ public record Position(double latitude, double longitude, double altitude) {
     }
 
     boolean southOf(Position anotherPosition) {
-        var diff = this.longitude - anotherPosition.longitude;
+        var diff = this.latitude - anotherPosition.latitude;
         if (diff < 0) {
             return true;
         } else {
