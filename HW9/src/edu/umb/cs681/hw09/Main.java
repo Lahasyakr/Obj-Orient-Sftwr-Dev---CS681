@@ -17,14 +17,5 @@ public class Main {
         T2.start();
         T3.start();
         T4.start();
-
-        try {
-            T1.join();
-            T2.join();
-            T3.join();
-            T4.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
