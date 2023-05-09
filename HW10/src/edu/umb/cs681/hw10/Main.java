@@ -84,23 +84,5 @@ public class Main {
         t13.interrupt();
         t14.interrupt();
 
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-            t6.join();
-            t7.join();
-            t8.join();
-            t9.join();
-            t10.join();
-            t11.join();
-            t12.join();
-            t13.join();
-            t14.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

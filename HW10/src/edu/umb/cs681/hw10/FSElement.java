@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class FSElement {
-    private static ReentrantLock lock = new ReentrantLock();
+    protected ReentrantLock lock = new ReentrantLock();
 
     protected Directory parent;
     protected String name;
