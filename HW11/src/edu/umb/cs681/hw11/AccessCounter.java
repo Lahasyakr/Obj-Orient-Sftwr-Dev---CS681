@@ -6,8 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class AccessCounter {
     private HashMap<java.nio.file.Path, Integer> ACMap = new HashMap<>();
-    private static final ReentrantLock staticLock = new ReentrantLock();
-    private final ReentrantLock nonStaticLock = new ReentrantLock();
+    private static  ReentrantLock staticLock = new ReentrantLock();
+    private  ReentrantLock nonStaticLock = new ReentrantLock();
 
     private static AccessCounter instance = null;
 
