@@ -8,16 +8,7 @@ public class ThreadSafeBankAccount2 implements BankAccount{
 	private ReentrantLock lock = new ReentrantLock();
 	private Condition sufficientFundsCondition = lock.newCondition();
 	private Condition belowUpperLimitFundsCondition = lock.newCondition();
-	private boolean done = false;
-
-	public void setDone() {
-        lock.lock();
-        try {
-            done = true;
-        } finally {
-            lock.unlock();
-        }
-    }
+	
 	public void deposit(double amount){
 		lock.lock();
 		try{

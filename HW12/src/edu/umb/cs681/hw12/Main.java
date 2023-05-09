@@ -73,30 +73,5 @@ public class Main {
         withdraw_t10.interrupt();
         deposit_t10.interrupt();
 
-        try {
-            withdraw_t1.join();
-            deposit_t1.join();
-            withdraw_t2.join();
-            deposit_t2.join();
-            withdraw_t3.join();
-            deposit_t3.join();
-            withdraw_t4.join();
-            deposit_t4.join();
-            withdraw_t5.join();
-            deposit_t5.join();
-            withdraw_t6.join();
-            deposit_t6.join();
-            withdraw_t7.join();
-            deposit_t7.join();
-            withdraw_t8.join();
-            deposit_t8.join();
-            withdraw_t9.join();
-            deposit_t9.join();
-            withdraw_t10.join();
-            deposit_t10.join();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
