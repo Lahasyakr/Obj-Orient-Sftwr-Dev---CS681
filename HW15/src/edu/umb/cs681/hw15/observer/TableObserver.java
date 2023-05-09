@@ -4,7 +4,7 @@ public class TableObserver implements Observer<StockEvent> {
 
     public void update(Observable<StockEvent> observable, StockEvent object) {
         StockEvent event = (StockEvent) object;
-        System.out.print("\n Table Observer of StockEvent:Shown here  " + event.getTicker() + " " + event.getQuote());
+        System.out.print("\n Table Observer of StockEvent:Shown here  " + event.ticker() + " " + event.quote());
 
     }
 }

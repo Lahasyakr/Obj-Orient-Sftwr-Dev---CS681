@@ -9,16 +9,17 @@ public class StockQuoteObservable extends Observable<StockEvent> {
 
 	private ReentrantLock lockTQ = new ReentrantLock();
 
-	void changeQuote(String T, double Q) {
+	public void changeQuote(String T, double Q) {
+		lockTQ.lock();
 		try {
-			lockTQ.lock();
 			mappings.put(T, Q);
+			notifyObservers(new StockEvent(T, Q));
 		} finally {
 			lockTQ.unlock();
 		}
 
 		// setChanged();
-		notifyObservers(new StockEvent(T, Q));
+		
 	}
 
 }

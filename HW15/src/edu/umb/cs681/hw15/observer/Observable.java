@@ -9,8 +9,9 @@ public abstract class Observable<T> {
 	private ReentrantLock lockObs = new ReentrantLock();
 
 	public void addObserver(Observer<T> o) {
+		lockObs.lock();
 		try {
-			lockObs.lock();
+
 			observers.add(o);
 		} finally {
 			lockObs.unlock();
@@ -18,8 +19,9 @@ public abstract class Observable<T> {
 	}
 
 	public void clearObservers() {
+		lockObs.lock();
 		try {
-			lockObs.lock();
+
 			observers.clear();
 		} finally {
 			lockObs.unlock();
@@ -28,8 +30,9 @@ public abstract class Observable<T> {
 	}
 
 	public List<Observer<T>> getObservers() {
+		lockObs.lock();
 		try {
-			lockObs.lock();
+
 			return observers;
 		} finally {
 			lockObs.unlock();
@@ -37,8 +40,9 @@ public abstract class Observable<T> {
 	}
 
 	public int countObservers() {
+		lockObs.lock();
 		try {
-			lockObs.lock();
+
 			return observers.size();
 		} finally {
 			lockObs.unlock();
@@ -47,8 +51,9 @@ public abstract class Observable<T> {
 	}
 
 	public void removeObserver(Observer<T> o) {
+		lockObs.lock();
 		try {
-			lockObs.lock();
+
 			observers.remove(o);
 		} finally {
 			lockObs.unlock();
@@ -56,18 +61,19 @@ public abstract class Observable<T> {
 	}
 
 	public void notifyObservers(T event) {
-		LinkedList<Observer<T>> observersLocal;
+		Object[] observersLocal;
+		lockObs.lock();
 		try {
-			lockObs.lock();
-			observersLocal = observers;
+
+			observersLocal = observers.toArray();
 
 		} finally {
 			lockObs.unlock();
 		}
 
-		observersLocal.forEach((observer) -> {
-			observer.update(this, event);
-		});
+		for (int i = 0; i < observersLocal.length; i++) {
+			((Observer) observersLocal[i]).update(this, event);
+		}
 	}
 
 }
