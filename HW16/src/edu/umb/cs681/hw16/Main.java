@@ -3,7 +3,7 @@ package edu.umb.cs681.hw16;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("##### Not Thread safe cart and customer class execution #####");
+        System.out.println("##### Not Thread safe cart class execution #####");
         NotThreadSafeCart cart = new NotThreadSafeCart();
 
         Customer customer1 = new Customer(cart);
@@ -28,7 +28,7 @@ public class Main {
 
 
 
-        System.out.println("\n\n*** Thread safe cart and customer class execution ****");
+        System.out.println("\n\n*** Thread safe cart class execution ****");
         ThreadSafeCart safeCart = new ThreadSafeCart();
 
         Customer threadsafeCustomer1 = new Customer(safeCart);

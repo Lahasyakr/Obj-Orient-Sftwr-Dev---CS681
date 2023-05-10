@@ -1,38 +1,38 @@
 package edu.umb.cs681.hw16;
 
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ThreadSafeCart implements Cart {
     private int items = 0;
-    private ReentrantLock lock = new ReentrantLock();
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public void addItem() {
-        lock.lock();
+        lock.writeLock().lock();
         try {
             items++;
             System.out.println("Item added : : total items in cart " + items);
         } finally {
-            lock.unlock();
+            lock.writeLock().unlock();
         }
     }
 
     public void removeItem() {
-        lock.lock();
+        lock.writeLock().lock();
         try {
 
             items--;
             System.out.println("Item removed from cart : total items in cart " + items);
         } finally {
-            lock.unlock();
+            lock.writeLock().unlock();
         }
     }
 
     public int getItems() {
-        lock.lock();
+        lock.readLock().lock();
         try {
             return items;
         } finally {
-            lock.unlock();
+            lock.readLock().unlock();
         }
     }
 }
