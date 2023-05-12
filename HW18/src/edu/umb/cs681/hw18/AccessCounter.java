@@ -12,9 +12,13 @@ public class AccessCounter {
     }
 
     public static AccessCounter getInstance() {
-        if (instance == null)
-            instance = new AccessCounter();
+        if (instance == null) {
+            synchronized (AccessCounter.class) {
+                instance = new AccessCounter();
+            }
+        }
         return instance;
+
     }
 
     public void increment(Path path) {
