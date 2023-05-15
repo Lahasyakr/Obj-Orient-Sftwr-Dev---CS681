@@ -2,11 +2,10 @@ package edu.umb.cs681.hw19.observer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Observable<T> {
-	private Queue<Observer<T>> observers = new ConcurrentLinkedQueue<>();
+	private ConcurrentLinkedQueue<Observer<T>> observers = new ConcurrentLinkedQueue<>();
 
 	public void addObserver(Observer<T> o) {
 		observers.add(o);

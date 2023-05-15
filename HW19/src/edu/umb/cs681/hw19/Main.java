@@ -19,7 +19,7 @@ public class Main {
         stockObservable.addObserver(lineChartObserver);
 
         ArrayList<Thread> threads = new ArrayList<Thread>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 12; i++) {
             Thread t = new Thread(() -> {
 
                 stockObservable.changeQuote("Rise", 800.0);
@@ -47,7 +47,7 @@ public class Main {
         }
         
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 12; i++) {
             try {
                 threads.get(i).join();
             } catch (Exception e) {
