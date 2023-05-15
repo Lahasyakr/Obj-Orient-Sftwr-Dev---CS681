@@ -21,7 +21,7 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 
 	public void generatePrimes() {
 		for (long n = from; n <= to; n++) {
-			// Stop generating prime numbers if done==true
+			// Stop generating prime numbers if done == true
 			lock.lock();
 			try {
 				if (done) {
