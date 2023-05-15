@@ -5,20 +5,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class RunnableCancellableInterruptiblePrimeFactorizer
         extends RunnableCancellablePrimeFactorizer {
 
-    private boolean done = false;
     private final ReentrantLock lock = new ReentrantLock();
 
     public RunnableCancellableInterruptiblePrimeFactorizer(long dividend, long from, long to) {
         super(dividend, from, to);
-    }
-
-    public void setDone() {
-        lock.lock();
-        try {
-            done = true;
-        } finally {
-            lock.unlock();
-        }
     }
 
     public void generatePrimeFactors() {
@@ -28,7 +18,7 @@ public class RunnableCancellableInterruptiblePrimeFactorizer
 
             lock.lock();
             try {
-                if (done) {
+                if (isDone()) {
                     System.out.println("Factors generation process is stopped !!");
                     this.factors.clear();
                     break;
@@ -60,7 +50,7 @@ public class RunnableCancellableInterruptiblePrimeFactorizer
     public static void main(String[] args) {
         /*-------------single thread------------------- */
         RunnableCancellableInterruptiblePrimeFactorizer gen = new RunnableCancellableInterruptiblePrimeFactorizer(36,
-        2, 30);
+                2, 30);
 
         Thread t = new Thread(gen);
         t.start();
@@ -83,8 +73,7 @@ public class RunnableCancellableInterruptiblePrimeFactorizer
         System.out.print("Factors of 36 are	:\t\t");
         gen.getPrimeFactors().forEach((Long l) -> System.out.print(l + ", "));
 
-
-         /*-------------mutli thread------------------- */
+        /*-------------mutli thread------------------- */
 
         RunnableCancellableInterruptiblePrimeFactorizer gen1 = new RunnableCancellableInterruptiblePrimeFactorizer(84,
                 2, 9);

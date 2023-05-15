@@ -1,6 +1,5 @@
 package edu.umb.cs681.hw08;
 
-
 import java.util.concurrent.locks.ReentrantLock;
 
 public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer {
@@ -20,6 +19,10 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer 
         } finally {
             lock.unlock();
         }
+    }
+
+    public boolean isDone() {
+        return done;
     }
 
     public void generatePrimeFactors() {
@@ -53,7 +56,7 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer 
 
     public static void main(String[] args) {
 
-        //***************Single Thread**************
+        // ***************Single Thread**************
 
         System.out.println("\n\nPrime Factorization of 36	using single thread:\n");
         RunnableCancellablePrimeFactorizer gen = new RunnableCancellablePrimeFactorizer(36, 2, (long) Math.sqrt(36));
