@@ -7,8 +7,6 @@ public class Directory extends FSElement {
 
     private LinkedList<FSElement> children;
 
-    //private static ReentrantLock lock = new ReentrantLock();
-
     public Directory(Directory parent, String name, int size, LocalDateTime creationTime) {
         super(parent, name, size, creationTime);
 
