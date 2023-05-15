@@ -6,7 +6,7 @@ public class Main {
         RunnableCancellablePrimeGenerator gen1 = new RunnableCancellablePrimeGenerator(1, 100);
         Thread t1 = new Thread(gen1);
         t1.start();
-        // gen1.setDone();
+        gen1.setDone();
         try {
             t1.join();
         } catch (InterruptedException e) {
@@ -24,7 +24,7 @@ public class Main {
 
         t2.start();
         t3.start();
-        // gen2.setDone();
+        gen2.setDone();
         gen3.setDone();
 
         try {
@@ -74,8 +74,7 @@ public class Main {
         thread1.start();
         thread2.start();
 
-        /* r1.setDone();
-        r2.setDone(); */
+        r2.setDone(); 
 
         try {
             thread1.join();
