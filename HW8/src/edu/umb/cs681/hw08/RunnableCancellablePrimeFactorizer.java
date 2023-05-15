@@ -30,6 +30,7 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer 
             lock.lock();
             try {
                 if (done) {
+                    System.out.println("Stopped generating factorization.");
                     break;
                 }
                 if (divisor > 2 && isEven(divisor)) {
