@@ -13,11 +13,10 @@ public class StockQuoteObservable extends Observable<StockEvent> {
 		lockTQ.lock();
 		try {
 			mappings.put(T, Q);
-			notifyObservers(new StockEvent(T, Q));
 		} finally {
 			lockTQ.unlock();
 		}
-
+		notifyObservers(new StockEvent(T, Q));
 		// setChanged();
 		
 	}
