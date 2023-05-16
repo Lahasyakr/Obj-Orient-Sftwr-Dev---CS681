@@ -1,12 +1,11 @@
 package edu.umb.cs681.hw14;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ExitHandler implements Runnable {
 
     private ReentrantLock lock = new ReentrantLock();
-    private AtomicBoolean done = new AtomicBoolean(false);
+    private volatile boolean done = false;
     private AdmissionMonitor monitor;
 
     public ExitHandler(AdmissionMonitor monitor) {
@@ -14,12 +13,7 @@ public class ExitHandler implements Runnable {
     }
 
     public void setDone() {
-        lock.lock();
-        try {
-            done.set(true);
-        } finally {
-            lock.unlock();
-        }
+        done = true;
     }
 
     @Override
@@ -28,8 +22,8 @@ public class ExitHandler implements Runnable {
         while (true) { // for infinite loop
             lock.lock();
             try {
-                if (done.get()) {
-                    System.out.println("Exit Denied!");
+                if (done) {
+                    System.out.println("As done = true Exit Denied!");
                     break;
                 }
                 monitor.exit();
