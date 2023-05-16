@@ -27,7 +27,7 @@ public class RunnableCancellableFileSystem implements Runnable {
             lock.lock();
             try {
                 if (done) {
-                    System.out.println("Acess Terminated");
+                    System.out.println(Thread.currentThread().getName()+ " - " + "Acess Terminated");
                     break;
                 } else {
                     LocalDateTime date = LocalDateTime.now();
@@ -44,19 +44,19 @@ public class RunnableCancellableFileSystem implements Runnable {
                     File c = new File(home, "c", 6, date);
                     Link d = new Link(root, "d", 1, date, pictures);
                     Link e = new Link(root, "e", 2, date, x);
-                    System.out.println("is Root directory: " + root.isDirectory());
-                    System.out.println("is e directory: " + e.isDirectory());
-                    System.out.println("is e Link: " + e.isLink());
-                    System.out.println("is x directory: " + x.isDirectory());
-                    System.out.println("target of link d : " + d.getTarget().getName());
-                    System.out.println("parent of link d : " + d.getParent().getName());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "is Root directory: " + root.isDirectory());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "is e directory: " + e.isDirectory());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "is e Link: " + e.isLink());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "is x directory: " + x.isDirectory());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "target of link d : " + d.getTarget().getName());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "parent of link d : " + d.getParent().getName());
 
-                    System.out.println("target of link e : " + e.getTarget().getName());
-                    System.out.println("parent of link e : " + e.getParent().getName());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "target of link e : " + e.getTarget().getName());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "parent of link e : " + e.getParent().getName());
 
-                    System.out.println("count of sub directories under root  :  " + root.getSubDirectories().size());
+                    System.out.println(Thread.currentThread().getName()+ " - " + "count of sub directories under root  :  " + root.getSubDirectories().size());
 
-                    System.out.println("Subdirctories of Root : \t\t");
+                    System.out.println(Thread.currentThread().getName()+ " - " + "Subdirctories of Root : \t\t");
                     root.getSubDirectories().forEach((item) -> System.out.print(item.getName() + ", "));
                     System.out.println();
 
