@@ -35,7 +35,7 @@ public class RequestHandler implements Runnable {
             lock.lock();
             try {
                 if (done.get()) {
-                    System.out.println("Acess Terminated");
+                    System.out.println("the value of `done` = true, exit.. " + Thread.currentThread().getName());
                     break;
                 }
 
@@ -43,7 +43,7 @@ public class RequestHandler implements Runnable {
                 Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
 
                 ac.increment(path);
-                System.out.println(files[ranNum] + " \t: " + ac.getCount(path));
+                System.out.println(Thread.currentThread().getName()+ " - " + files[ranNum] + " \t: " + ac.getCount(path)  );
             } finally {
                 lock.unlock();
             }
@@ -139,25 +139,6 @@ public class RequestHandler implements Runnable {
         t12.interrupt();
         t13.interrupt();
         t14.interrupt();
-
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-            t6.join();
-            t7.join();
-            t8.join();
-            t9.join();
-            t10.join();
-            t11.join();
-            t12.join();
-            t13.join();
-            t14.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
