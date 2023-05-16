@@ -3,21 +3,12 @@ package edu.umb.cs681.hw11;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class RequestHandler implements Runnable {
-
-    private ReentrantLock lock = new ReentrantLock();
-    private AtomicBoolean done = new AtomicBoolean(false);
+    volatile boolean done = false;
 
     public void setDone() {
-        lock.lock();
-        try {
-            done.set(true);
-        } finally {
-            lock.unlock();
-        }
+        done = true;
     }
 
     @Override
@@ -32,21 +23,18 @@ public class RequestHandler implements Runnable {
         AccessCounter ac = AccessCounter.getInstance();
 
         while (true) { // for infinite loop
-            lock.lock();
-            try {
-                if (done.get()) {
-                    System.out.println("the value of `done` = true, exit.. " + Thread.currentThread().getName());
-                    break;
-                }
 
-                int ranNum = new Random().nextInt(files.length);
-                Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
-
-                ac.increment(path);
-                System.out.println(Thread.currentThread().getName()+ " - " + files[ranNum] + " \t: " + ac.getCount(path)  );
-            } finally {
-                lock.unlock();
+            if (done) {
+                System.out.println("the value of `done` = true, exit.. " + Thread.currentThread().getName());
+                break;
             }
+
+            int ranNum = new Random().nextInt(files.length);
+            Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
+
+            ac.increment(path);
+            System.out.println(
+                    Thread.currentThread().getName() + " - " + files[ranNum] + " \t: " + ac.getCount(path));
 
             try {
                 Thread.sleep(1000);
