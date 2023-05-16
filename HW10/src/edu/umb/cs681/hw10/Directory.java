@@ -41,13 +41,9 @@ public class Directory extends FSElement {
     }
 
     public int countChildren() {
-        int countOfChildren = 0;
         lock.lock();
         try {
-            for (FSElement item : children) {
-                countOfChildren += 1;
-            }
-            return countOfChildren;
+            return children.size();
         } finally {
             lock.unlock();
         }
