@@ -3,21 +3,13 @@ package edu.umb.cs681.hw13;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class RequestHandler implements Runnable {
 
-    private ReentrantLock lock = new ReentrantLock();
-    private AtomicBoolean done = new AtomicBoolean(false);
+    volatile boolean done = false;
 
     public void setDone() {
-        lock.lock();
-        try {
-            done.set(true);
-        } finally {
-            lock.unlock();
-        }
+        done = true;
     }
 
     @Override
@@ -32,25 +24,23 @@ public class RequestHandler implements Runnable {
         AccessCounter ac = AccessCounter.getInstance();
 
         while (true) { // for infinite loop
-            lock.lock();
-            try {
-                if (done.get()) {
-                    System.out.println("Acess Terminated");
-                    break;
-                }
 
-                int ranNum = new Random().nextInt(files.length);
-                Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
-
-                ac.increment(path);
-                System.out.println(files[ranNum] + " \t: " + ac.getCount(path));
-            } finally {
-                lock.unlock();
+            if (done) {
+                System.out.println(Thread.currentThread().getName() + " Acess Terminated");
+                break;
             }
 
+            int ranNum = new Random().nextInt(files.length);
+            Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
+
+            ac.increment(path);
+            System.out.println(files[ranNum] + " \t: " + ac.getCount(path));
+
             try {
+                System.out.println("going to sleep for a while.. " + Thread.currentThread().getName());
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                System.out.println("wake up!. " + Thread.currentThread().getName());
                 System.out.println(e.toString());
                 continue;
             }
@@ -139,25 +129,6 @@ public class RequestHandler implements Runnable {
         t12.interrupt();
         t13.interrupt();
         t14.interrupt();
-
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-            t6.join();
-            t7.join();
-            t8.join();
-            t9.join();
-            t10.join();
-            t11.join();
-            t12.join();
-            t13.join();
-            t14.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
