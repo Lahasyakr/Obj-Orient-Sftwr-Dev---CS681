@@ -4,7 +4,7 @@ import edu.umb.cs681.hw15.observer.RunnableStockQuoteObservable;
 
 public class Main {
     public static void main(String[] args) {
-
+      
         RunnableStockQuoteObservable gen1 = new RunnableStockQuoteObservable();
         RunnableStockQuoteObservable gen2 = new RunnableStockQuoteObservable();
         RunnableStockQuoteObservable gen3 = new RunnableStockQuoteObservable();
@@ -19,7 +19,7 @@ public class Main {
         RunnableStockQuoteObservable gen12 = new RunnableStockQuoteObservable();
         RunnableStockQuoteObservable gen13 = new RunnableStockQuoteObservable();
         RunnableStockQuoteObservable gen14 = new RunnableStockQuoteObservable();
-
+        
         Thread t1 = new Thread(gen1);
         Thread t2 = new Thread(gen2);
         Thread t3 = new Thread(gen3);
@@ -34,7 +34,7 @@ public class Main {
         Thread t12 = new Thread(gen12);
         Thread t13 = new Thread(gen13);
         Thread t14 = new Thread(gen14);
-
+        
         t1.start();
         t2.start();
         t3.start();
@@ -49,13 +49,13 @@ public class Main {
         t12.start();
         t13.start();
         t14.start();
-
+        
         try {
-            Thread.sleep(3000);
+        Thread.sleep(3000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+        e.printStackTrace();
         }
-
+        
         gen1.setDone();
         gen2.setDone();
         gen3.setDone();
@@ -70,7 +70,7 @@ public class Main {
         gen12.setDone();
         gen13.setDone();
         gen14.setDone();
-
+        
         t1.interrupt();
         t2.interrupt();
         t3.interrupt();
@@ -85,24 +85,8 @@ public class Main {
         t12.interrupt();
         t13.interrupt();
         t14.interrupt();
-
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-            t6.join();
-            t7.join();
-            t8.join();
-            t9.join();
-            t10.join();
-            t11.join();
-            t12.join();
-            t13.join();
-            t14.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        
+    
+     
     }
 }

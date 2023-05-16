@@ -14,7 +14,7 @@ public class RunnableStockQuoteObservable implements Runnable {
         StockQuoteObservable item = new StockQuoteObservable();
         while (true) { // for infinite loop
                 if (done.get()) {
-                    System.out.println("Terminated");
+                    System.out.println("As done=true Terminated");
                     break;
                 }
 
