@@ -2,32 +2,39 @@ package edu.umb.cs681.hw18;
 
 import java.nio.file.Path;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class AccessCounter {
-    private ConcurrentHashMap<Path, Integer> ACMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Path, AtomicInteger> ACMap = new ConcurrentHashMap<Path, AtomicInteger>();
 
     private static AccessCounter instance = null;
+    private static ReentrantLock lock = new ReentrantLock();
 
     private AccessCounter() {
     }
 
     public static AccessCounter getInstance() {
-        if (instance == null) {
-            synchronized (AccessCounter.class) {
-                instance = new AccessCounter();
+        lock.lock();
+        try {
+            if (instance == null) {
+                synchronized (AccessCounter.class) {
+                    instance = new AccessCounter();
+                }
             }
+            return instance;
+        } finally {
+            lock.unlock();
         }
-        return instance;
 
     }
 
     public void increment(Path path) {
-        ACMap.compute(path, (k, v) -> {
-            return v == null ? 1 : v + 1;
-        });
+        ACMap.putIfAbsent(path, new AtomicInteger(0));
+        ACMap.get(path).incrementAndGet();
     }
 
-    public int getCount(Path path) {
-        return ACMap.getOrDefault(path, 0);
+    public AtomicInteger getCount(Path path) {
+        return ACMap.get(path);
     }
 }

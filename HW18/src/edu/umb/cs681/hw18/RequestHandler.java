@@ -3,14 +3,13 @@ package edu.umb.cs681.hw18;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RequestHandler implements Runnable {
 
-    private AtomicBoolean done = new AtomicBoolean(false);
+    volatile boolean done = false;
 
     public void setDone() {
-        done.set(true);
+        done = true;
     }
 
     @Override
@@ -26,8 +25,8 @@ public class RequestHandler implements Runnable {
 
         while (true) { // for infinite loop
 
-            if (done.get()) {
-                System.out.println("the value of `done` = true, exit.. "+Thread.currentThread().getName());
+            if (done) {
+                System.out.println("the value of `done` = true, exit.. " + Thread.currentThread().getName());
                 break;
             }
 
@@ -35,7 +34,7 @@ public class RequestHandler implements Runnable {
             Path path = FileSystems.getDefault().getPath(".", files[ranNum]); // random file path
 
             ac.increment(path);
-            System.out.println(Thread.currentThread().getName()+ " - " + files[ranNum] + " \t: " + ac.getCount(path)  );
+            System.out.println(Thread.currentThread().getName() + " - " + files[ranNum] + " \t: " + ac.getCount(path));
 
             try {
                 Thread.sleep(1000);
@@ -129,24 +128,6 @@ public class RequestHandler implements Runnable {
         t13.interrupt();
         t14.interrupt();
 
-        try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
-            t6.join();
-            t7.join();
-            t8.join();
-            t9.join();
-            t10.join();
-            t11.join();
-            t12.join();
-            t13.join();
-            t14.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
