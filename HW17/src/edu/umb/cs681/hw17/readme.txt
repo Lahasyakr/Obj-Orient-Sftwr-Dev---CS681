@@ -4,7 +4,7 @@ The goal is to ensure thread safety while accessing these shared resources.
 It consists of two classes: NotSafeCafeteria and SafeCafeteria.
 
 
-The app includes two different implementations of the Cart interface:
+The app includes two different implementations of the cafeteria:
 - NotSafeCafeteria: An implementation that is not thread-safe, and can result in potential deadlock as two threads uses multiple locks (coffeeLock and waterLock) in an 
     inconsistent order.
 - SafeCafeteria: An implementation, where locks (coffeeLock and waterLock) are acquired in a consistent order in all threads to eliminate the possibility of deadlock.
