@@ -10,12 +10,12 @@ The app includes two different implementations of the cafeteria interface:
 - SafeCafeteria: An implementation, where locks (coffeeLock and waterLock) are acquired in a consistent order in all threads to eliminate the possibility of deadlock.
 
 ### Why the original code is not thread-safe:
-   The original code in the NotSafeCafeteria class is not thread-safe because it uses multiple locks (coffeeLock and waterLock) in an 
+   The original code in the "NotSafeCafeteria" class is not thread-safe because it uses multiple locks (coffeeLock and waterLock) in an 
     inconsistent order in the different threads. This inconsistency can lead to a potential deadlock, where both 
     threads hold one lock and are waiting to acquire the other lock, resulting in a state where no progress can be made.
 
 ### How the code was revised to be thread-safe:
-   To make the code thread-safe, the SafeCafeteria class was introduced. In this revised code, the locks (coffeeLock and waterLock) are acquired in a 
+   To make the code thread-safe, the "SafeCafeteria" class was introduced. In this revised code, the locks (coffeeLock and waterLock) are acquired in a 
     consistent order in both threads, preventing potential deadlocks. The order of acquiring locks ensures that if one thread has acquired the coffeeLock, 
     the other thread must wait until it is released before attempting to acquire it. This approach eliminates the possibility of a deadlock.
 
