@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ExitHandler implements Runnable {
 
     private ReentrantLock lock = new ReentrantLock();
-    private volatile boolean done = false;
+    private boolean done = false;
     private AdmissionMonitor monitor;
 
     public ExitHandler(AdmissionMonitor monitor) {
@@ -13,7 +13,12 @@ public class ExitHandler implements Runnable {
     }
 
     public void setDone() {
-        done = true;
+        lock.lock();
+        try {
+            done = true;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -35,7 +40,7 @@ public class ExitHandler implements Runnable {
             } catch (InterruptedException e) {
                 System.out.println(e.toString());
                 continue;
-            } 
+            }
 
         }
     }
