@@ -1,4 +1,4 @@
-Library with Thread-Safe and Not Thread-Safe Implementations.
+This apllication simulates Library with Thread-Safe and Not Thread-Safe Implementations.
 
 This app simulates a basic library management system, where students can take and return books from a Library.
 
@@ -7,13 +7,13 @@ The app includes two different implementations of the Library interface:
   the same Library object simultaneously.
 - ThreadSafeLibrary: an implementation that uses a ReentrantReadWriteLock to ensure thread-safety when multiple threads access the same Library object.
 
-Why the original code is not thread-safe:
-    The original implementation of the Library interface (NotThreadSafeLibrary) is not thread-safe because it allows multiple threads to access and modify the 
+### Why the original code is not thread-safe:
+   The original implementation of the Library interface (NotThreadSafeLibrary) is not thread-safe because it allows multiple threads to access and modify the 
     Library books concurrently, without any synchronization or locking mechanisms. This can result in race conditions, where multiple threads modify the 
     same data at the same time, which can lead to inconsistent data and incorrect behavior.
 
-How the code was revised to be thread-safe:
-    To make the Library implementation thread-safe, the "ThreadSafeLibrary" class was created to use a ReentrantReadWriteLock.
+### How the code was revised to be thread-safe:
+   To make the Library implementation thread-safe, the "ThreadSafeLibrary" class was created to use a ReentrantReadWriteLock.
     The ReentrantReadWriteLock provides a way to allow multiple threads to read the shared resource i.e library books variable simultaneously 
     while ensuring that only one thread can modify the library books at a time.
     The addBook() and removeBook() methods use the writeLock() method to acquire a write lock, which ensures that only one thread can modify the 
