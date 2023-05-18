@@ -6,13 +6,13 @@ public class Main {
         System.out.println("##### Not Thread safe library class execution #####");
         NotThreadSafeLibrary library = new NotThreadSafeLibrary();
 
-        Student customer1 = new Student(library);
-        Student customer2 = new Student(library);
-        Student customer3 = new Student(library);
+        Student student1 = new Student(library);
+        Student student2 = new Student(library);
+        Student student3 = new Student(library);
 
-        Thread thread1 = new Thread(customer1);
-        Thread thread2 = new Thread(customer2);
-        Thread thread3 = new Thread(customer3);
+        Thread thread1 = new Thread(student1);
+        Thread thread2 = new Thread(student2);
+        Thread thread3 = new Thread(student3);
 
         thread1.start();
         thread2.start();
