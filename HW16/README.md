@@ -1,4 +1,4 @@
-Library with Thread-Safe and Not Thread-Safe Implementations.
+This apllication simulates Library with Thread-Safe and Not Thread-Safe Implementations.
 
 This app simulates a basic library management system, where students can take and return books from a Library.
 
