@@ -3,12 +3,12 @@ package edu.umb.cs681.hw16;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("##### Not Thread safe cart class execution #####");
-        NotThreadSafeCart cart = new NotThreadSafeCart();
+        System.out.println("##### Not Thread safe library class execution #####");
+        NotThreadSafeLibrary library = new NotThreadSafeLibrary();
 
-        Customer customer1 = new Customer(cart);
-        Customer customer2 = new Customer(cart);
-        Customer customer3 = new Customer(cart);
+        Student customer1 = new Student(library);
+        Student customer2 = new Student(library);
+        Student customer3 = new Student(library);
 
         Thread thread1 = new Thread(customer1);
         Thread thread2 = new Thread(customer2);
@@ -28,16 +28,16 @@ public class Main {
 
 
 
-        System.out.println("\n\n*** Thread safe cart class execution ****");
-        ThreadSafeCart safeCart = new ThreadSafeCart();
+        System.out.println("\n\n*** Thread safe library class execution ****");
+        ThreadSafeLibrary safeLibrary = new ThreadSafeLibrary();
 
-        Customer threadsafeCustomer1 = new Customer(safeCart);
-        Customer threadsafeCustomer2 = new Customer(safeCart);
-        Customer threadsafeCustomer3 = new Customer(safeCart);
+        Student threadsafeStudent1 = new Student(safeLibrary);
+        Student threadsafeStudent2 = new Student(safeLibrary);
+        Student threadsafeStudent3 = new Student(safeLibrary);
 
-        Thread t1 = new Thread(threadsafeCustomer1);
-        Thread t2 = new Thread(threadsafeCustomer2);
-        Thread t3 = new Thread(threadsafeCustomer3);
+        Thread t1 = new Thread(threadsafeStudent1);
+        Thread t2 = new Thread(threadsafeStudent2);
+        Thread t3 = new Thread(threadsafeStudent3);
 
         t1.start();
         t2.start();
