@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
         /*-------------single thread------------------- */
-        RunnableCancellableInterruptiblePrimeFactorizer gen = new RunnableCancellableInterruptiblePrimeFactorizer(36,
-        2, 30);
+        RunnableCancellableInterruptiblePrimeFactorizer gen = new RunnableCancellableInterruptiblePrimeFactorizer(144,
+        2, 12);
 
         Thread t = new Thread(gen);
         t.start();
