@@ -4,7 +4,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ThreadSafeLibrary implements Library {
     private int books = 0;
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public void addBook() {
         lock.writeLock().lock();
