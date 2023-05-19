@@ -5,7 +5,7 @@ import java.util.concurrent.locks.Condition;
 
 public class ThreadSafeBankAccount2 implements BankAccount {
 	private double balance = 0;
-	private ReentrantLock lock = new ReentrantLock();
+	private final ReentrantLock lock = new ReentrantLock();
 	private Condition sufficientFundsCondition = lock.newCondition();
 	private Condition belowUpperLimitFundsCondition = lock.newCondition();
 
