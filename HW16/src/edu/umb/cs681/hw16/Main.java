@@ -26,8 +26,6 @@ public class Main {
             e.printStackTrace();
         }
 
-
-
         System.out.println("\n\n*** Thread safe library class execution ****");
         ThreadSafeLibrary safeLibrary = new ThreadSafeLibrary();
 
@@ -42,8 +40,21 @@ public class Main {
         t1.start();
         t2.start();
         t3.start();
-    
-       
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        threadsafeStudent1.setDone();
+        threadsafeStudent2.setDone();
+        threadsafeStudent3.setDone();
+
+        t1.interrupt();
+        t2.interrupt();
+        t3.interrupt();
+
 
     }
 }
