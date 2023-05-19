@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class AdmissionMonitor {
     private int currentVisitors;
 
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     private Condition maxVisitorCondition = lock.writeLock().newCondition();
 
     public int countCurrentVisitors() {
