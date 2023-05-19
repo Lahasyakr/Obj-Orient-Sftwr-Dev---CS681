@@ -4,7 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class StatsHandler implements Runnable {
     private ReentrantLock lock = new ReentrantLock();
-    private volatile boolean done = false;
+    private boolean done = false;
     private AdmissionMonitor monitor;
 
     public StatsHandler(AdmissionMonitor monitor) {
@@ -12,7 +12,12 @@ public class StatsHandler implements Runnable {
     }
 
     public void setDone() {
-        done = true;
+        lock.lock();
+        try {
+            done = true;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -22,7 +27,7 @@ public class StatsHandler implements Runnable {
             lock.lock();
             try {
                 if (done) {
-                    System.out.println("As done = true Count cant be returned");
+                    System.out.println(Thread.currentThread().getName()+ " : " + "As done = true Exit!! Stats thread");
                     break;
                 }
                 monitor.countCurrentVisitors();

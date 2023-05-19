@@ -4,7 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class EntranceHandler implements Runnable {
     private ReentrantLock lock = new ReentrantLock();
-    private volatile boolean done = false;
+    private boolean done = false;
     private AdmissionMonitor monitor;
 
     public EntranceHandler(AdmissionMonitor monitor) {
@@ -12,7 +12,12 @@ public class EntranceHandler implements Runnable {
     }
 
     public void setDone() {
-        done = true;
+        lock.lock();
+        try {
+            done = true;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -23,7 +28,7 @@ public class EntranceHandler implements Runnable {
             lock.lock();
             try {
                 if (done) {
-                    System.out.println("As done = true entry Denied");
+                    System.out.println(Thread.currentThread().getName()+ " : " + "As done = true Exit !! entry thread");
                     break;
                 }
                 monitor.enter();

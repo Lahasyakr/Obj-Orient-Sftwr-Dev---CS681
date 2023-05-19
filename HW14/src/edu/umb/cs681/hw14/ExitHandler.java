@@ -28,7 +28,7 @@ public class ExitHandler implements Runnable {
             lock.lock();
             try {
                 if (done) {
-                    System.out.println("As done = true Exit Denied!");
+                    System.out.println(Thread.currentThread().getName()+ " : " + "As done = true Exit!! Exit thread");
                     break;
                 }
                 monitor.exit();
