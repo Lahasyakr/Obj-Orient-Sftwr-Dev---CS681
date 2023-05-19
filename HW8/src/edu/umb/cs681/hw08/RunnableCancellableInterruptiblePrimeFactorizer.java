@@ -20,7 +20,7 @@ public class RunnableCancellableInterruptiblePrimeFactorizer
             try {
                 if (isDone()) {
                     System.out.println("Factors generation process is stopped !!");
-                    this.factors.clear();
+                    //this.factors.clear();
                     break;
                 }
                 if (divisor > 2 && isEven(divisor)) {
