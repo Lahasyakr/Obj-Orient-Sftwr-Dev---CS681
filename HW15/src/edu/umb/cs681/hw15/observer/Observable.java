@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Observable<T> {
 	private LinkedList<Observer<T>> observers = new LinkedList<>();
-	private ReentrantLock lockObs = new ReentrantLock();
+	private final ReentrantLock lockObs = new ReentrantLock();
 
 	public void addObserver(Observer<T> o) {
 		lockObs.lock();
