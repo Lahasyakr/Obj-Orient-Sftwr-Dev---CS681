@@ -18,7 +18,7 @@ public class Main {
 
         try (Stream<String> lines = Files.lines(path)) {
 
-            List<List<String>> data = lines.skip(1).map(line -> {
+            List<List<String>> data = lines.skip(1).parallel().map(line -> {
                 return Stream.of(line.split(",")).map(value -> value.substring(0, value.length()))
                         .collect(Collectors.toList());
             }).collect(Collectors.toList());
