@@ -18,7 +18,7 @@ public class WithdrawRunnable implements Runnable {
         for (int i = 0; i < 10; i++) {
 
             if (done) {
-                    System.out.println(Thread.currentThread().getName() + " - " + "Withdraw runnable terminated");
+                    System.out.println(Thread.currentThread().getName() + " As done = true : " + "Exit!! Withdraw runnable");
                 break;
             }
             account.withdraw(100);

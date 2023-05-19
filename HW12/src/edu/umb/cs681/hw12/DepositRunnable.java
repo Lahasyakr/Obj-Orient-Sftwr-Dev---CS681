@@ -17,7 +17,7 @@ public class DepositRunnable implements Runnable {
 
         for (int i = 0; i < 10; i++) {
             if (done) {
-                    System.out.println(Thread.currentThread().getName() + " - " + "Deposit runnable terminated");
+                    System.out.println(Thread.currentThread().getName() + " As done = true : " + "Exit!! Deposit runnable");
                 break;
             }
             account.deposit(100);
